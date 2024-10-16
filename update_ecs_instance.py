@@ -24,7 +24,8 @@ DEV_TASK_ROLE = "dev_ecs_task_execution_role"
 @click.option("--region", help="AWS region where the ECS tasks are located", required=False, default="us-east-1")
 @click.option("--target-env", help="the target environment to update the task instance", required=False)
 def deploy(cluster, service, image, region, target_env):
-    client = boto3.client("ecs")
+    # Crete ECS client with region
+    client = boto3.client("ecs", region_name=region)
 
     # Fetch the current task definition
     print("Fetching current task definition...")
